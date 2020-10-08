@@ -6,7 +6,7 @@ public class DragDrop : MonoBehaviour
 {
     private Vector3 mOffset;
     private float mZCoord;
-    public static bool canCheck;
+    public static bool mouseUp;
 
     void OnMouseDown()
     {
@@ -28,6 +28,6 @@ public class DragDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
-        canCheck = true;
+        mouseUp = true;
     }
 }

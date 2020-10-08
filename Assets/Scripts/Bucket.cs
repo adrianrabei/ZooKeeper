@@ -9,16 +9,24 @@ public class Bucket : MonoBehaviour
     public GameObject cubeFoodPrefab;
     private Vector3 position;
     public GameObject instantiatedFood;
-    public static bool instantiated;
-    public static bool canInstantiate;
-    private int x;
     public Vector3 initialPos;
-    
+    public static bool instantiated;
+    public int foodCount;
+    private string randomFood;
+    public List<string> foodList = new List<string>();
+
     void Start()
     {
-        position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
-        canInstantiate = true;
-        x = Random.Range(1, 4);
+        position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
+
+        foodList.Add("meat");
+        foodList.Add("meat");
+        foodList.Add("vegetable");
+        foodList.Add("vegetable");
+        foodList.Add("fish");
+        foodList.Add("fish");
+
+        foodCount = foodList.Count;
     }
 
     
@@ -29,36 +37,30 @@ public class Bucket : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(x == 1)
+        if(instantiated == false)
         {
-            if (canInstantiate)
+            if (foodList.Count > 0)
             {
-                instantiatedFood = Instantiate(capsuleFoodPrefab, position, Quaternion.identity);
+                int index = Random.Range(0, foodList.Count);
+                randomFood = foodList[index];
+
+                if (randomFood == "meat")
+                {
+                    instantiatedFood = Instantiate(cubeFoodPrefab, position, Quaternion.identity);
+                }
+                else if (randomFood == "vegetable")
+                {
+                    instantiatedFood = Instantiate(capsuleFoodPrefab, position, Quaternion.identity);
+                }
+                else if (randomFood == "fish")
+                {
+                    instantiatedFood = Instantiate(sphereFoodPrefab, position, Quaternion.identity);
+                }
+
                 instantiated = true;
-                canInstantiate = false;
-                x = Random.Range(1, 4);
+                initialPos = new Vector3(instantiatedFood.transform.position.x, instantiatedFood.transform.position.y, instantiatedFood.transform.position.z);
+                foodList.Remove(randomFood);
             }
         }
-        else if(x == 2)
-        {
-            if (canInstantiate)
-            {
-                instantiatedFood = Instantiate(sphereFoodPrefab, position, Quaternion.identity);
-                instantiated = true;
-                canInstantiate = false;
-                x = Random.Range(1, 4);
-            }
-        }
-        else if(x == 3)
-        {
-            if (canInstantiate)
-            {
-                instantiatedFood = Instantiate(cubeFoodPrefab, position, Quaternion.identity);
-                instantiated = true;
-                canInstantiate = false;
-                x = Random.Range(1, 4);
-            }
-        }
-        initialPos = new Vector3(instantiatedFood.transform.position.x, instantiatedFood.transform.position.y, instantiatedFood.transform.position.z);
     }
 }
