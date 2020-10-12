@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
-    [SerializeField] private GameObject wolf, deer, penguin;
+    [SerializeField] private GameObject wolf, deer, penguin, wolfFeedArea, deerFeedArea, penguinFeedArea;
     private Vector3 wolfPos, deerPos, penguinPos;
     private int wolfHunger, deerHunger, penguinHunger;
     public Bucket food;
+    public HungerSlider slider;
 
     void Start()
     {
-        wolfPos = wolf.transform.position;
-        deerPos = deer.transform.position;
-        penguinPos = penguin.transform.position;
+        wolfFeedArea = wolf.gameObject.transform.GetChild(0).gameObject;
+        wolfPos = wolfFeedArea.transform.position;
+
+        deerFeedArea = deer.gameObject.transform.GetChild(0).gameObject;
+        deerPos = deerFeedArea.transform.position;
+
+        penguinFeedArea = penguin.gameObject.transform.GetChild(0).gameObject;
+        penguinPos = penguinFeedArea.transform.position;
 
         wolfHunger = deerHunger = penguinHunger = 2;
     }
@@ -24,17 +30,17 @@ public class Animal : MonoBehaviour
         {
             if (DragDrop.mouseUp)
             {
-                if (Mathf.Abs(food.instantiatedFood.transform.position.x - wolfPos.x) <= 0.5f && Mathf.Abs(food.instantiatedFood.transform.position.y - wolfPos.y) <= 0.5f)
+                if (Mathf.Abs(food.instantiatedFood.transform.position.x - wolfPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - wolfPos.y) <= 1f)
                 {
                     Eat();
                     wolfHunger--;
                 }
-                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - deerPos.x) <= 0.5f && Mathf.Abs(food.instantiatedFood.transform.position.y - deerPos.y) <= 0.5f)
+                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - deerPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - deerPos.y) <= 1f)
                 {
                     Eat();
                     deerHunger--;
                 }
-                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - penguinPos.x) <= 0.5f && Mathf.Abs(food.instantiatedFood.transform.position.y - penguinPos.y) <= 0.5f)
+                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - penguinPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - penguinPos.y) <= 1f)
                 {
                     Eat();
                     penguinHunger--;
@@ -60,6 +66,7 @@ public class Animal : MonoBehaviour
 
     private void Eat()
     {
+        slider.IncrementProgress(0.5f);
         Destroy(food.instantiatedFood);
         Bucket.instantiated = false;
         DragDrop.mouseUp = false;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bucket : MonoBehaviour
 {
-    public GameObject capsuleFoodPrefab;
-    public GameObject sphereFoodPrefab;
-    public GameObject cubeFoodPrefab;
+    public GameObject herbivoreFoodPrefab;
+    public GameObject fishFoodPrefab;
+    public GameObject carnivoreFoodPrefab;
     private Vector3 position;
     public GameObject instantiatedFood;
     public Vector3 initialPos;
@@ -17,7 +17,7 @@ public class Bucket : MonoBehaviour
 
     void Start()
     {
-        position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
+        position = new Vector3(gameObject.transform.position.x -1f, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
 
         foodList.Add("meat");
         foodList.Add("meat");
@@ -46,15 +46,15 @@ public class Bucket : MonoBehaviour
 
                 if (randomFood == "meat")
                 {
-                    instantiatedFood = Instantiate(cubeFoodPrefab, position, Quaternion.identity);
+                    instantiatedFood = Instantiate(carnivoreFoodPrefab, position, carnivoreFoodPrefab.transform.rotation);
                 }
                 else if (randomFood == "vegetable")
                 {
-                    instantiatedFood = Instantiate(capsuleFoodPrefab, position, Quaternion.identity);
+                    instantiatedFood = Instantiate(herbivoreFoodPrefab, position, herbivoreFoodPrefab.transform.rotation);
                 }
                 else if (randomFood == "fish")
                 {
-                    instantiatedFood = Instantiate(sphereFoodPrefab, position, Quaternion.identity);
+                    instantiatedFood = Instantiate(fishFoodPrefab, position, fishFoodPrefab.transform.rotation);
                 }
 
                 instantiated = true;
