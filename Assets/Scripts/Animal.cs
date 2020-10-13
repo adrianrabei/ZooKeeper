@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class Animal : MonoBehaviour
 {
-    [SerializeField] private GameObject wolf, deer, penguin, wolfFeedArea, deerFeedArea, penguinFeedArea;
-    private Vector3 wolfPos, deerPos, penguinPos;
+    [SerializeField] private GameObject animal1, animal2, animal3, animal1FeedArea, animal2FeedArea, animal3FeedArea;
+    private Vector3 animal1Pos, animal2Pos, animal3Pos;
     private int hunger;
     public Bucket food;
     [SerializeField] private HungerSlider slider;
@@ -14,14 +14,14 @@ public class Animal : MonoBehaviour
 
     void Start()
     {
-        wolfFeedArea = wolf.gameObject.transform.GetChild(0).gameObject;
-        wolfPos = wolfFeedArea.transform.position;
+        animal1FeedArea = animal1.gameObject.transform.GetChild(0).gameObject;
+        animal1Pos = animal1FeedArea.transform.position;
 
-        deerFeedArea = deer.gameObject.transform.GetChild(0).gameObject;
-        deerPos = deerFeedArea.transform.position;
+        animal2FeedArea = animal2.gameObject.transform.GetChild(0).gameObject;
+        animal2Pos = animal2FeedArea.transform.position;
 
-        penguinFeedArea = penguin.gameObject.transform.GetChild(0).gameObject;
-        penguinPos = penguinFeedArea.transform.position;
+        animal3FeedArea = animal3.gameObject.transform.GetChild(0).gameObject;
+        animal3Pos = animal3FeedArea.transform.position;
 
         hunger = 2;
 
@@ -35,20 +35,35 @@ public class Animal : MonoBehaviour
         {
             if (DragDrop.mouseUp)
             {
-                if (Mathf.Abs(food.instantiatedFood.transform.position.x - wolfPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - wolfPos.y) <= 1f)
+                if (Mathf.Abs(food.instantiatedFood.transform.position.x - animal1Pos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - animal1Pos.y) <= 1f)
                 {
                     Eat();
-                    hunger--;
+                    if(food.instantiatedFood.transform.tag == animal1.transform.tag)
+                    {
+                        Debug.Log("NICE");
+                        hunger--;
+                        slider.IncrementProgress(0.5f);
+                    }
                 }
-                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - deerPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - deerPos.y) <= 1f)
+                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - animal2Pos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - animal2Pos.y) <= 1f)
                 {
                     Eat();
-                    hunger--;
+                    if (food.instantiatedFood.transform.tag == animal2.transform.tag)
+                    {
+                        Debug.Log("NICE");
+                        hunger--;
+                        slider.IncrementProgress(0.5f);
+                    }
                 }
-                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - penguinPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - penguinPos.y) <= 1f)
+                else if (Mathf.Abs(food.instantiatedFood.transform.position.x - animal3Pos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - animal3Pos.y) <= 1f)
                 {
                     Eat();
-                    hunger--;
+                    if (food.instantiatedFood.transform.tag == animal3.transform.tag)
+                    {
+                        Debug.Log("NICE");
+                        hunger--;
+                        slider.IncrementProgress(0.5f);
+                    }
                 }
                 else
                 {
@@ -58,7 +73,7 @@ public class Animal : MonoBehaviour
                 food.foodCount = food.foodList.Count;
             }
 
-            if(hunger == 0 || hunger < 0)
+            if(hunger == 0)
             {
                 animalNr++;
                 allFull++;
@@ -67,7 +82,9 @@ public class Animal : MonoBehaviour
 
             if(food.foodCount == 0)
             {
-                if (allFull == 3)
+                Debug.Log("BUCKET IS EPMTY");
+
+                if (allFull != 3)
                 {
                     Debug.Log("Animals didnt eat well!");
                 }
@@ -78,7 +95,6 @@ public class Animal : MonoBehaviour
 
     private void Eat()
     {
-        slider.IncrementProgress(0.5f);
         Destroy(food.instantiatedFood);
         Bucket.instantiated = false;
         DragDrop.mouseUp = false;

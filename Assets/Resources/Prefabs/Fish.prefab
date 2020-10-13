@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2074253803061765603}
   m_Layer: 0
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06627994, y: 0.025871348, z: 0.28562602}
-  m_Center: {x: -0.0014762263, y: 0.0005133956, z: 0.0115962485}
+  m_Size: {x: 0.061567992, y: 0.06337515, z: 0.28562602}
+  m_Center: {x: 0.0008797494, y: -0.0056378427, z: 0.011596253}
 --- !u!1 &8831932371227534509
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 3997492044389260475}
   - component: {fileID: 3971124270303013127}
   - component: {fileID: 3979731793223994099}
-  - component: {fileID: 1424713922159431722}
   - component: {fileID: 1630058104551446147}
   m_Layer: 0
   m_Name: Ham
-  m_TagString: Untagged
+  m_TagString: Carnivore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,18 +84,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1424713922159431722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993061528285224255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac63889f79a2fd429a34d26d65124d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1630058104551446147
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.044380423, y: 0.03244916, z: 0.22628468}
-  m_Center: {x: -0.000087419525, y: 0.0015710131, z: 0}
+  m_Size: {x: 0.12221641, y: 0.032449163, z: 0.29745826}
+  m_Center: {x: -0.0128928, y: 0.0015710134, z: -0.03001606}
 --- !u!1 &3993581305900543497
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,10 @@ public class CameraMovement : MonoBehaviour
     
     void Update()
     {
-        MoveCamera(Animal.animalNr);
+        if(bucket.foodCount != 0)
+        {
+            MoveCamera(Animal.animalNr);
+        }
     }
 
     private void MoveCamera(int animalNr)
@@ -32,14 +35,14 @@ public class CameraMovement : MonoBehaviour
             if (animalNr == 2)
             {
                 transform.DOMove(camPos2.transform.position, 1f);
-                bucket.transform.DOMove(bucketPos2.transform.position, 2f);
+                bucket.transform.DOMove(bucketPos2.transform.position, 4f);
                 Bucket.instantiated = false;
                 camMoved = true;
             }
             else if (animalNr == 3)
             {
                 transform.DOMove(camPos3.transform.position, 1f);
-                bucket.transform.DOMove(bucketPos3.transform.position, 2f);
+                bucket.transform.DOMove(bucketPos3.transform.position, 4f);
                 Bucket.instantiated = false;
                 camMoved = true;
             }
