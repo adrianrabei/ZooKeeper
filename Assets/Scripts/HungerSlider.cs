@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HungerSlider : MonoBehaviour
 {
-    private Slider slider;
-    private float targetProgress = 0;
+    public Slider slider;
+    public float targetProgress = 0;
     private float fillSpeed = 0.5f;
     void Start()
     {
@@ -15,7 +15,13 @@ public class HungerSlider : MonoBehaviour
 
     void Update()
     {
-        if(slider.value < targetProgress)
+        if (CameraMovement.camMoved)
+        {
+            targetProgress = 0;
+            slider.value = 0;
+            CameraMovement.camMoved = false;
+        }
+        else if (slider.value < targetProgress)
         {
             slider.value += fillSpeed * Time.deltaTime;
         }

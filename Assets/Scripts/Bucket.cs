@@ -17,7 +17,6 @@ public class Bucket : MonoBehaviour
 
     void Start()
     {
-        position = new Vector3(gameObject.transform.position.x -1f, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
 
         foodList.Add("meat");
         foodList.Add("meat");
@@ -37,7 +36,8 @@ public class Bucket : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(instantiated == false)
+        position = new Vector3(gameObject.transform.position.x - 1f, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
+        if (instantiated == false)
         {
             if (foodList.Count > 0)
             {

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Animal : MonoBehaviour
 {
     [SerializeField] private GameObject wolf, deer, penguin, wolfFeedArea, deerFeedArea, penguinFeedArea;
     private Vector3 wolfPos, deerPos, penguinPos;
-    private int wolfHunger, deerHunger, penguinHunger;
+    private int hunger;
     public Bucket food;
-    public HungerSlider slider;
+    [SerializeField] private HungerSlider slider;
+    public static int animalNr, allFull;
 
     void Start()
     {
@@ -21,7 +23,10 @@ public class Animal : MonoBehaviour
         penguinFeedArea = penguin.gameObject.transform.GetChild(0).gameObject;
         penguinPos = penguinFeedArea.transform.position;
 
-        wolfHunger = deerHunger = penguinHunger = 2;
+        hunger = 2;
+
+        animalNr = 1;
+        allFull = 0;
     }
 
     void Update()
@@ -33,17 +38,17 @@ public class Animal : MonoBehaviour
                 if (Mathf.Abs(food.instantiatedFood.transform.position.x - wolfPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - wolfPos.y) <= 1f)
                 {
                     Eat();
-                    wolfHunger--;
+                    hunger--;
                 }
                 else if (Mathf.Abs(food.instantiatedFood.transform.position.x - deerPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - deerPos.y) <= 1f)
                 {
                     Eat();
-                    deerHunger--;
+                    hunger--;
                 }
                 else if (Mathf.Abs(food.instantiatedFood.transform.position.x - penguinPos.x) <= 1f && Mathf.Abs(food.instantiatedFood.transform.position.y - penguinPos.y) <= 1f)
                 {
                     Eat();
-                    penguinHunger--;
+                    hunger--;
                 }
                 else
                 {
@@ -53,9 +58,16 @@ public class Animal : MonoBehaviour
                 food.foodCount = food.foodList.Count;
             }
 
+            if(hunger == 0 || hunger < 0)
+            {
+                animalNr++;
+                allFull++;
+                hunger = 2;
+            }
+
             if(food.foodCount == 0)
             {
-                if (wolfHunger > 0 || deerHunger > 0 || penguinHunger > 0)
+                if (allFull == 3)
                 {
                     Debug.Log("Animals didnt eat well!");
                 }
