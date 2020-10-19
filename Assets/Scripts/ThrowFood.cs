@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThrowFood : MonoBehaviour
 {
+    [SerializeField] private Animal animal;
     private Rigidbody food;
     private Vector3 direction;
     [SerializeField] private float speed = 500f;
@@ -31,5 +32,17 @@ public class ThrowFood : MonoBehaviour
     private void OnMouseDown()
     {
         Throw();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("NICE");
+        if (other.gameObject.transform.tag == gameObject.transform.tag)
+        {
+            animal.hunger--;
+            animal.slider.IncrementProgress(0.5f);
+            Destroy(gameObject);
+        }
+        else Destroy(gameObject);
     }
 }
