@@ -7,7 +7,7 @@ public class HungerSlider : MonoBehaviour
 {
     public Slider slider;
     public float targetProgress = 0;
-    private float fillSpeed = 0.5f;
+    private float fillSpeed = 1.8f;
     void Start()
     {
         slider = GetComponent<Slider>();
